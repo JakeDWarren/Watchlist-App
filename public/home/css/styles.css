@@ -10,8 +10,6 @@ html, body {
   min-height: 100%;
 }
 
-
-
 header{
   display: flex;
   justify-content: flex-start;
@@ -100,7 +98,8 @@ list-style: none;
 }
 
 .card:first-of-type {
-  width:90%;
+  width: 100%;
+  margin: 20px;
   height: auto;
 }
 
@@ -130,7 +129,6 @@ input[type="color"]:focus,
 .pink{
   background-color: #ee4266;
 }
-
 
 .platformImage {
   height: auto;

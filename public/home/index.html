@@ -66,8 +66,8 @@
         resultsText = "";
         for (var i = 0; i < 5; i++) {
           resultsText += "<div class='oneResult card'>";
-          resultsText += "<div> " + movieInfoArray[i].title + ":  </div>";
-          resultsText += "<div> " + movieInfoArray[i].runtime + " &ensp;&ensp;&ensp; </div>";
+          resultsText += "<div>" + movieInfoArray[i].title + "</div>";
+          resultsText += "<div> " + movieInfoArray[i].runtime + "</div>";
             resultsText += "<div class='image'>Watch it on: ";
             let urls = '';
             for (var j = 0; j<5; j++){
@@ -106,7 +106,7 @@
                 urls += " ";
 
             }
-            resultsText += " &ensp;&ensp;&ensp; </div>";
+            resultsText += "</div>";
             resultsText += "</div>"
         }
 
@@ -117,7 +117,6 @@
     })
     </script>
 </main>
-
 
 <footer>
   <div class="flex-container-row flex-centre flex-footer">
