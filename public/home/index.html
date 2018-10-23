@@ -64,38 +64,50 @@
         console.log(resultsL);
 
         resultsText = "";
-        for (var i = 0; i < 5; i++) {
+        if (resultsL > 5){
+              endpoint = 5;
+          } else {
+              endpoint = resultsL;
+          }
+        for (var i = 0; i < endpoint; i++) {
           resultsText += "<div class='oneResult card'>";
           resultsText += "<div>" + movieInfoArray[i].title + "</div>";
           resultsText += "<div> " + movieInfoArray[i].runtime + "</div>";
             resultsText += "<div class='image'>Watch it on: ";
             let urls = '';
-            for (var j = 0; j<5; j++){
+            var offersL = movieInfoArray[i].offers.length;
+            var offersEndpoint = 0;
+            if (offersL > 5){
+              offersEndpoint = 5;
+            } else {
+              offersEndpoint = offersL;
+            }
+            for (var j = 0; j< offersEndpoint; j++){
                 var urlstr = movieInfoArray[i].offers[j].urls.standard_web;
                 resultsText += '<a href="';
                 resultsText += movieInfoArray[i].offers[j].urls.standard_web;
                 if (urlstr.includes("sky")){
-                    resultsText += '"> Sky</a>';
+                    resultsText += '"><img class="applogos" src="home/Resources/applogos/skygo.png" /></a>';
                 } else if (urlstr.includes("netflix")){
-                    resultsText += '"> Netflix</a>';
+                    resultsText += '"><img class="applogos" src="home/Resources/applogos/netflix.png" /></a>';
                 } else if (urlstr.includes("nowtv")){
-                    resultsText += '"> NowTV</a>';
+                    resultsText += '"><img class="applogos" src="home/Resources/applogos/nowtv.png" /></a>';
                 } else if (urlstr.includes("amazon")){
-                    resultsText += '"> Amazon</a>';
+                    resultsText += '"><img class="applogos" src="home/Resources/applogos/amazon.png" /></a>';
                 } else if (urlstr.includes("play.google")){
-                    resultsText += '"> Google Play</a>';
+                    resultsText += '"><img class="applogos" src="home/Resources/applogos/googleplay.png" /></a>';
                 } else if (urlstr.includes("itunes")){
-                  resultsText += '"> iTunes</a>';
+                  resultsText += '"><img class="applogos" src="home/Resources/applogos/itunes.png" /></a>';
                 } else if (urlstr.includes("talktalktv")){
                   resultsText += '"> TalkTalkTV</a>';
                 } else if (urlstr.includes("microsoft")){
-                  resultsText += '"> Microsoft Films & TV</a>';
+                  resultsText += '"><img class="applogos" src="home/Resources/applogos/microsoft.png" /></a>';
                 } else if (urlstr.includes("rakuten")){
                   resultsText += '"> Rakuten</a>';
                 } else if (urlstr.includes("chili")){
                   resultsText += '"> Chili</a>';
                 } else if (urlstr.includes("youtube")){
-                  resultsText += '"> Youtube</a>';
+                  resultsText += '"><img class="applogos" src="home/Resources/applogos/youtube.png" /></a>';
                 } else if (!urlstr.includes("www.")){
                   resultsText += '"></a>';
                 } else {

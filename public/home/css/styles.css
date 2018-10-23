@@ -186,3 +186,9 @@ form.search{
   height: 40px;
   width: 40px;
 }
+
+img.applogos{
+    height:40px;
+    width: 40px;
+    padding: 10px;
+}
