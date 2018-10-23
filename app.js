@@ -7,23 +7,21 @@ const fetch = require('node-fetch');
 var path = require('path');
 let db;
 
+//Setup data for connection to Datababse
 const url = "mongodb://localhost:27017/Watchlist";
 const port = 3000;
 
-
-
+//Inital setup executing functions
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// app.use(bodyParser.urlencoded())
-// app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, 'public')));
-
+//Serve the intial home page
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/public/home/index.html');
 });
 
+//Register a user to the database
 app.post('/addUser', function(req, res){
   db.collection("Accounts").insertOne(req.body, function(err, result){
     if (err) throw err;
@@ -32,10 +30,7 @@ app.post('/addUser', function(req, res){
   });
 });
 
-// app.get("/profile", function(req, res){
-//   res.send('/Watchlist/Profile/www/index.html')
-// });
-
+//Send login input to database for verifcation
 app.post("/login", function(req, res){
   const data = req.body;
   db.collection("Accounts").findOne({Username: data.username}, function(err, document){
@@ -49,6 +44,7 @@ app.post("/login", function(req, res){
   })
 })
 
+//Find user account
 app.get('/getUser', function(req, res){
   db.collection("Accounts").find().toArray(function(err, result){
       if (err) throw err;
@@ -57,6 +53,8 @@ app.get('/getUser', function(req, res){
 });
 
 //Profile page code
+
+//Add movie
 app.post('/addMovies', function(req, res){
   db.collection("Movies").insertOne(req.body, function(err, result){
     if (err) throw err;
@@ -65,6 +63,7 @@ app.post('/addMovies', function(req, res){
   })
 })
 
+//Retrieve movie
 app.get('/getMovies', function(req, res){
   db.collection("Movies").find().toArray(function(err, result){
       if (err) throw err;
@@ -73,15 +72,8 @@ app.get('/getMovies', function(req, res){
 });
 
 //Home page code
-app.get('/retrievedata', function(req, res){
-  db.collection("Results").find().toArray(function(err, result){
-    if (err) throw err;
-    res.send(result);
-    console.log(result);
-  })
-})
 
-
+//Print api to console
 function print_result(name, result)
 {
 	console.log(name+":");
@@ -89,6 +81,7 @@ function print_result(name, result)
 	console.log("\n\n\n\n");
 }
 
+//Post cleaned results to /search (this is the fall back incase of error)
 app.post('/search', async function (req, res) {
   console.log('data', req.body.name)
   var justwatch = new JustWatch();
@@ -113,6 +106,7 @@ MongoClient.connect(url, function(err, client){
   db = client.db("Watchlist");
 })
 
+//Listen to the port
 app.listen(port, function() {
   console.log(`App Listening on Port ${port}`)
 })
